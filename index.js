@@ -20,7 +20,7 @@ const io = require('socket.io')(http);
                         //settings.led[data.channel] = data.color;
                         //socket.broadcast.emit('update', settings);
                         //updateLED();
-                })
+                });
 
                 socket.on('disconnect', () => {
                         console.log('user disconnected');
