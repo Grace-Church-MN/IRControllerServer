@@ -14,7 +14,7 @@ const io = require('socket.io')(http);
         io.on('connection', function(socket){
                 console.log('a user connected');
                 //socket.emit('update', settings);
-                socket.on('message', (data) => {
+                socket.on('switch tv', (data) => {
 					console.log("data");
 					console.log(data);
                         //settings.led[data.channel] = data.color;
