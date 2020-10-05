@@ -14,9 +14,9 @@ const { exec } = require('child_process');
 			if(message.id){
 				console.log(message.id);
 				if(message.id == "0"){
-						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd Vizio KEY_POWER');
+						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + message.type + ' ' + message.key);
 				} else {
-						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + message.id + ' Vizio KEY_POWER');
+						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + message.id + ' ' + message.type + ' ' + message.key);
 				}
 			}
 		});
