@@ -10,7 +10,7 @@ const io = require('socket.io')(http);
         io.on('connection', function(socket){
                 console.log('a user connected');
 				socket.on('message', function (message) {
-					console.log("message");
+					console.log(message);
 				})
 
                 socket.on('disconnect', () => {
