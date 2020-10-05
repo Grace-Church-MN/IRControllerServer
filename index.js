@@ -12,7 +12,12 @@ const { exec } = require('child_process');
 		console.log('a user connected');
 		socket.on('message', function (message) {
 			if(message.id){
-				console.log(exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd' + message.id + 'Vizio KEY_POWER'));
+				console.log(message.id);
+				if(message.id == "0"){
+						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd Vizio KEY_POWER');
+				} else {
+						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + message.id + ' Vizio KEY_POWER');
+				}
 			}
 		});
 
