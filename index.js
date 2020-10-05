@@ -9,8 +9,11 @@ const io = require('socket.io')(http);
         });
         io.on('connection', function(socket){
                 console.log('a user connected');
-				socket.on('message', function(data) {
-					console.log(data);
+				socket.on('message', () => {
+					console.log("message");
+				});
+				socket.on('new', () => {
+					console.log("new");
 				});
 
                 socket.on('disconnect', () => {
