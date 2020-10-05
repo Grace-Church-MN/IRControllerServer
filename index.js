@@ -11,14 +11,18 @@ const { exec } = require('child_process');
 	io.on('connection', function(socket){
 		console.log('a user connected');
 		socket.on('message', function (message) {
-			if(message.id){
-				console.log(message.id);
-				if(message.id == "0"){
-						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + message.type + ' ' + message.key);
-				} else {
-						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + message.id + ' ' + message.type + ' ' + message.key);
+			mesage.forEach((item, i) => {
+				if(item.id){
+					console.log(item.id);
+					if(item.id == "0"){
+						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
+						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
+					} else {
+						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
+						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
+					}
 				}
-			}
+			});
 		});
 
 		socket.on('disconnect', () => {
