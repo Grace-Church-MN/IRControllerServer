@@ -5,13 +5,13 @@ const io = require('socket.io')(http);
 (async () => {
 
         app.get('/', function(req, res){
-                res.send('<h1>Office Controller Server</h1>');
+                res.send('<h1>IR Controller Server</h1>');
         });
         io.on('connection', function(socket){
                 console.log('a user connected');
 				socket.on('message', function (message) {
 					console.log("message");
-				});
+				})
 
                 socket.on('disconnect', () => {
                         console.log('user disconnected');
