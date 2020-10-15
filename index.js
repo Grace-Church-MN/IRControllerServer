@@ -12,17 +12,18 @@ const { exec } = require('child_process');
 		console.log('a user connected');
 		socket.on('message', function (message) {
 			message.forEach((item, i) => {
-				if(item.id){
-					console.log(item.id);
-					if(item.id == "0"){
-						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
-						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
-					} else {
-						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
-						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
+				setTimeout(() => {
+					if(item.id){
+						console.log(item.id);
+						if(item.id == "0"){
+							console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
+							exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
+						} else {
+							console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
+							exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
+						}
 					}
-				}
-				wait(1000);
+				}, 1000);
 			});
 		});
 
