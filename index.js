@@ -22,6 +22,7 @@ const { exec } = require('child_process');
 						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
 					}
 				}
+				sleep(1);
 			});
 		});
 
