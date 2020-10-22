@@ -2,6 +2,7 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const { exec } = require('child_process');
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 (async () => {
 
@@ -10,20 +11,23 @@ const { exec } = require('child_process');
 	});
 	io.on('connection', function(socket){
 		console.log('a user connected');
-		socket.on('message', function (message) {
-			message.forEach((item, i) => {
+		socket.on('message', async function (message) {
+			for (let item of message) {
 				if(item.id){
 					console.log(item.id);
 					if(item.id == "0"){
 						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
 						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
+						await sleep(300);
 					} else {
 						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
 						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
+						await sleep(300);
 					}
 				}
-			});
+			}
 		});
+
 
 		socket.on('disconnect', () => {
 			console.log('user disconnected');
