@@ -18,11 +18,11 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 					if(item.id == "0"){
 						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
 						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd ' + item.type + ' ' + item.key);
-						await sleep(400);
+						await sleep(175);
 					} else {
 						console.log('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
 						exec('/usr/bin/irsend SEND_ONCE --device=/var/run/lirc/lircd-' + item.id + ' ' + item.type + ' ' + item.key);
-						await sleep(400);
+						await sleep(175);
 					}
 				}
 			}
